@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*.min.css" />
+    <link rel="stylesheet" asp-href-include="lib/font-awesome/css/*.css" />
+    <title>@ViewBag.Title</title>
+    <style>
+        .navbar-custom {
+            background-color: darkred;
+        }
+    </style>
+    <script asp-src-include="lib/jquery/**/jquery.min.js"></script>
+    <script asp-src-include="lib/jquery-validation/**/jquery.validate.min.js"></script>
+    <script asp-src-include="lib/jquery-validation-unobtrusive/**/*.min.js"></script>
+    <script asp-src-include="lib/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-custom navbar-inverse justify-content-between">
+         <a class="navbar-brand" href="#" style="color:white">PizzaHut</a>
+    </nav>
+    <!--
+         <div class="container">
+             <div class="row">
+                 <div class="col col-md-3">
+                     <a class="btn btn-outline-dark btn-block m-2">Hello World</a>
+                 </div>
+                 <div class="col col-m9">
+                     @RenderBody()
+                 </div>
+             </div>
+         </div> -->
+    @RenderBody()
+</body>
+</html>
