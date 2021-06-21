@@ -20,6 +20,7 @@
             <div class="card-header">
                 <h4>@ViewBag.Title</h4>
                 <a class="btn btn-sm btn-primary float-right" asp-action="Logout" asp-controller="Account">Log Out</a>
+                <a class="btn btn-sm btn-primary float-right" asp-action="Home" asp-controller="Product" asp-route-category="">Home</a>
             </div>
             <div class="card-body">
                 @if(TempData["message"] != null)

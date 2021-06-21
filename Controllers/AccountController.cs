@@ -35,7 +35,7 @@ namespace SportsStore.Controllers
                     await signInManager.SignOutAsync(); //SignIntAsync() ??
                     if((await signInManager.PasswordSignInAsync(user, loginModel.Password,false,false)).Succeeded)
                     {
-                        return Redirect(loginModel?.ReturnUrl ?? "/Admin/Index");
+                        return Redirect(loginModel?.ReturnUrl ?? "/Home"); ///Admin/Index
                     }
                 }
             }
@@ -52,13 +52,13 @@ namespace SportsStore.Controllers
         {
             return View(userManager.Users);
         }
-        [Authorize] //Changed from [AllowAnonymous]
+        [AllowAnonymous] //Changed from [AllowAnonymous]
         public ViewResult Create()
         {
             return View();
         }
         [HttpPost]
-        [Authorize]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(LoginModel model)
         {
@@ -72,7 +72,7 @@ namespace SportsStore.Controllers
                 IdentityResult result = await userManager.CreateAsync(user, model.Password);
                 if(result.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Login"); //Index
                 }
                 else
                 {
