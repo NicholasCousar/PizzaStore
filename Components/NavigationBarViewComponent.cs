@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SportsStore.Models;
- //Not used
+
 namespace SportsStore.Components
 {
-    public class NavigationMenuViewComponent : ViewComponent
+    public class NavigationBarViewComponent : ViewComponent
     {
         private IProductRepository repository;
-        public NavigationMenuViewComponent(IProductRepository repo)
+        public NavigationBarViewComponent(IProductRepository repo)
         {
             repository = repo;
         }
@@ -20,7 +20,7 @@ namespace SportsStore.Components
             return View(repository.Products
                 .Select(x => x.Category)
                 .Distinct()
-                .OrderBy(x => x));
+                .OrderBy(x => x)); 
         }
     }
 }
