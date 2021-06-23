@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Identity;
 
 namespace SportsStore.Models
 {
@@ -10,11 +11,26 @@ namespace SportsStore.Models
         public int OrderID { get; set; }
 
         [BindNever]
+        public string UserNumber { get; set; }
+
+        [BindNever]
         public ICollection<CartLine> Lines { get; set; }
 
         [BindNever]
         public bool Shipped {get; set;}
 
+        [Required(ErrorMessage = "Please enter your credit card number")]
+        public string CardNumber { get; set; }
+
+        [Required(ErrorMessage = "Please enter the expiration month")]
+        public string EMonth { get; set; }
+
+        [Required(ErrorMessage = "Please enter the expiration year")]
+        public string EYear { get; set; }
+
+        [Required(ErrorMessage = "Please enter the CVV")]
+        public int CVV { get; set; }
+        
         [Required(ErrorMessage = "Please enter your name")]
         public string Name { get; set; }
 

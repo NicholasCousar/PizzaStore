@@ -2,6 +2,7 @@
 using SportsStore.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace SportsStore.Controllers
 {
@@ -9,16 +10,18 @@ namespace SportsStore.Controllers
     {
         private IOrderRepository repository;
         private Cart cart;
-        public OrderController (IOrderRepository repoService, Cart cartService)
+        private UserManager<AppUser> userManager;
+        public OrderController (IOrderRepository repoService, Cart cartService, UserManager<AppUser> userMgr)
         {
+            userManager = userMgr;
             repository = repoService;
             cart  = cartService;
         }
         [Authorize]
-        public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
+        public ViewResult List() => View(repository.Orders.Where(o => o.UserNumber == userManager.GetUserId(HttpContext.User)));
         [HttpPost]
         [Authorize]
-        public ActionResult MarkShipped(int orderID)
+        public ActionResult MarkShipped(int orderID) //NO LONGER USED
         {
             Order order = repository.Orders.FirstOrDefault(o => orderID == o.OrderID); 
             if (order != null)
@@ -40,6 +43,7 @@ namespace SportsStore.Controllers
             if (ModelState.IsValid)
             {
                 order.Lines = cart.Lines.ToArray();
+                order.UserNumber = userManager.GetUserId(HttpContext.User);
                 repository.SaveOrder(order);
                 return RedirectToAction(nameof(Completed));
             }
@@ -53,5 +57,7 @@ namespace SportsStore.Controllers
             cart.Clear();
             return View();
         }
+
+     
     }
 }

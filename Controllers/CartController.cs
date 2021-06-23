@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using SportsStore.Models;
 using SportsStore.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace SportsStore.Controllers
 {
@@ -18,6 +20,7 @@ namespace SportsStore.Controllers
         {
             return View(new CartIndexViewModel { Cart = cart, ReturnUrl = returnUrl });
         }
+        [Authorize]
         public RedirectToActionResult AddToCart(int productId, string returnUrl)
         {
             Product product = repository.Products
@@ -28,6 +31,7 @@ namespace SportsStore.Controllers
             }
             return RedirectToAction("Index", new { returnUrl });
         }
+        [Authorize]
         public RedirectToActionResult RemoveFromCart(int productId, string returnUrl)
         {
             Product product = repository.Products

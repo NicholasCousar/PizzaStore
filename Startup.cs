@@ -68,7 +68,7 @@ namespace SportsStore
     }
 }
 
-//TASK 52 is next (page 122)
+//Complete Now converting the example to the project
 //THOUGHTS:
 //Also this is fun learning about new concepts and how they all interact with each-other.
 //Order & Checkout screen is added, i can convert this code into my project easly by changing the database to fit my business requirements.

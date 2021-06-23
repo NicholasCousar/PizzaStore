@@ -14,21 +14,25 @@
             <th colspan="2">Details</th>
             <th></th>
         </tr>
+        
+
         @foreach (Order q in Model)
         {
+            @if (q.Shipped == false)
+            {
             <tr>
                 <td>@q.Name</td>
                 <td>@q.Zip</td>
                 <th>Product</th>
                 <th>Quantity</th>
-                <td>
+                <!--<td>
                     <form asp-controller="Order" asp-action="MarkShipped" method="post">
-                        <!--Keeps on only passing 0-->
                         <button type="submit" value="submit" class="btn btn-sm btn-danger">Ship</button>
-                        <input type="hidden" name="orderID" value="@q.OrderID" />
+                        <input type="hidden" name="orderID" value="q.OrderID" />
                     </form>
-                </td>
+                </td>-->
             </tr>
+
             @foreach (CartLine line in q.Lines)
             {
                 <tr>
@@ -37,6 +41,7 @@
                     <td>@line.Quantity</td>
                     <td></td>
                 </tr>
+            }
             }
         }
 </table>
