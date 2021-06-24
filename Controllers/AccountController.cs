@@ -12,10 +12,15 @@ namespace SportsStore.Controllers
     {
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
-        public AccountController (UserManager<AppUser> userMgr, SignInManager<AppUser> signInMgr)
+        private IOrderRepository repository;
+        private Cart cart;
+       
+        public AccountController (UserManager<AppUser> userMgr, SignInManager<AppUser> signInMgr, IOrderRepository repoService, Cart cartService)
         {
             userManager = userMgr;
             signInManager = signInMgr;
+            repository = repoService;
+            cart = cartService;
         }
         [AllowAnonymous]
         public ViewResult Login(string returnUrl)
@@ -124,5 +129,6 @@ namespace SportsStore.Controllers
                 return RedirectToAction("Index");
             }
         }
+
     }    
 }
