@@ -13,7 +13,7 @@ namespace SportsStore.Models
             CartLine line = lineCollection
                 .Where(p => p.Product.ProductID == product.ProductID)
                 .FirstOrDefault();
-            if(line == null)
+            if (line == null)
             {
                 lineCollection.Add(new CartLine { Product = product, Quantity = quantity });
             }
@@ -22,8 +22,13 @@ namespace SportsStore.Models
                 line.Quantity += quantity;
             }
         }
+        
+
         public virtual void RemoveLine(Product product) => lineCollection.RemoveAll(l => l.Product.ProductID == product.ProductID);
-        public virtual decimal ComputeTotalValue() => lineCollection.Sum(e => e.Product.Price * e.Quantity);
+        public virtual decimal ComputeSubValue() => lineCollection.Sum(e => e.Product.Price * e.Quantity);
+        public virtual decimal ComputeTax() => ComputeSubValue() * 1/10;
+        public virtual decimal ComputeTotalValue() => ComputeSubValue() + ComputeTax();
+
         public virtual void Clear() => lineCollection.Clear();
         public virtual IEnumerable<CartLine> Lines => lineCollection;
     }

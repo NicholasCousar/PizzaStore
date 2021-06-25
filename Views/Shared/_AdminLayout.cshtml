@@ -9,6 +9,10 @@
             border-color: red;
             background-color: #fee;
         }
+        .ButtonSpace 
+        {
+            margin-left: 5px;
+        }
     </style>
     <script asp-src-include="lib/jquery/**/jquery.min.js"></script>
     <script asp-src-include="lib/jquery-validation/**/jquery.validate.min.js"></script>
@@ -19,7 +23,7 @@
         <div class="card">
             <div class="card-header">
                 <h4>@ViewBag.Title</h4>
-                <a class="btn btn-sm btn-primary float-right" asp-action="Logout" asp-controller="Account">Log Out</a>
+                <a class="btn btn-sm btn-primary float-right ButtonSpace" asp-action="Logout" asp-controller="Account">Log Out</a>
                 <a class="btn btn-sm btn-primary float-right" asp-action="Home" asp-controller="Product" asp-route-category="">Home</a>
             </div>
             <div class="card-body">

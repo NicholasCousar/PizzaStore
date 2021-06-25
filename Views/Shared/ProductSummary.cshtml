@@ -12,7 +12,6 @@
         </span>
         <form id="@Model.ProductID" asp-action="AddToCart" asp-controller="Cart" method="post" class="float-right m-2 p-1">
             <input type="hidden" asp-for="ProductID" />
-            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
             <button type="submit" class="btn btn-info btn-sm float-right">
                 Add To Cart
             </button>

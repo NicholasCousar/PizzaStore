@@ -2,35 +2,54 @@
 <style>
     .navbar-custom {
         background-color: darkred;
+        z-index: 1;
+    }
+    .navbar-bottom {
+        bottom: 0;
+        position: fixed;
+        width: 100%;
+        height: 50px; 
+    }
+    .navbar-top
+    {
+        height:60px
     }
 </style>
-
-<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+<nav class="navbar navbar-top navbar-expand-lg navbar-light navbar-custom">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button> <!--Functional-->
+        </button>
         <a class="nav-link active text-white" asp-action="Home" asp-controller="Product" asp-route-category="">
             <img class="navbar-brand text-white" src="~/Images/Logo.png" style="width:auto;height:50px;" alt="PizzaHut" />
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" asp-action="Login" asp-controller="Account" asp-route-category="">Login/Sign Up</a> <!--User Login/Sign In Here; Fuctional-->
+                   @if (ViewBag.Id == null)
+                   {
+                            <a class="nav-link active text-white" asp-action="Login" asp-controller="Account" asp-route-category="">Login/Sign Up</a>
+                   }
+                   else
+                   {
+                        <a class="nav-link active text-white" asp-action="Logout" asp-controller="Account">Log Out</a>
+                   }
+                        
+                    
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         Bussiness Details
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item text-black-50" asp-action="Index" asp-controller="FAQ" asp-route-category="">FAQ</a></li> <!--Functional-->
-                        <li><a class="dropdown-item text-black-50" asp-action="Index" asp-controller="AboutUs" asp-route-category="">About Us</a></li> <!--Functional-->
+                        <li><a class="dropdown-item text-black-50" asp-action="Index" asp-controller="FAQ" asp-route-category="">FAQ</a></li> 
+                        <li><a class="dropdown-item text-black-50" asp-action="Index" asp-controller="AboutUs" asp-route-category="">About Us</a></li> 
                         <li><hr class="dropdown-divider text-black-50"></li>
                         <li><a class="dropdown-item text-black-50" href="#">Something else here</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         Menu
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -43,12 +62,26 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active text-white" asp-action="List" asp-controller="Order" asp-route-category="">Order Confirmation</a> <!--Will be changed to allow users to see their Oder only via giving their Order Number; However in the meantime it just redirects to the admin list for orders not shipped-->
+                    <a class="nav-link active text-white" asp-action="List" asp-controller="Order" asp-route-category="">Order Confirmation</a> 
                 </li>
             </ul>
         </div>
     </div>
     <div class="float-right">
         @await Component.InvokeAsync("CartSummary")
+    </div>
+</nav>
+<nav class="navbar navbar-bottom navbar-expand-lg navbar-light navbar-custom">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#BottomNav" aria-controls="BottomNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="BottomNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <p class="text-white"><small>&#169; 2021</small></p>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
