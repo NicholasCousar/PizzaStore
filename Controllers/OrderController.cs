@@ -17,6 +17,7 @@ namespace SportsStore.Controllers
             repository = repoService;
             cart  = cartService;
         }
+
         [Authorize]
         public ViewResult List() => View(repository.Orders.Where(o => o.UserNumber == userManager.GetUserId(HttpContext.User)));
         [HttpPost]

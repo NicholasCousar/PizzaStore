@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using SportsStore.Models.ViewModels;
 using SportsStore.Models;
 
@@ -12,15 +11,12 @@ namespace SportsStore.Controllers
     {
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
-        private IOrderRepository repository;
-        private Cart cart;
+        
        
-        public AccountController (UserManager<AppUser> userMgr, SignInManager<AppUser> signInMgr, IOrderRepository repoService, Cart cartService)
+        public AccountController (UserManager<AppUser> userMgr, SignInManager<AppUser> signInMgr)
         {
             userManager = userMgr;
             signInManager = signInMgr;
-            repository = repoService;
-            cart = cartService;
         }
         [AllowAnonymous]
         public ViewResult Login(string returnUrl)
@@ -40,28 +36,32 @@ namespace SportsStore.Controllers
                     await signInManager.SignOutAsync(); //SignIntAsync() ??
                     if((await signInManager.PasswordSignInAsync(user, loginModel.Password,false,false)).Succeeded)
                     {
-                        return Redirect(loginModel?.ReturnUrl ?? "/Home"); ///Admin/Index
+                        return Redirect(loginModel?.ReturnUrl ?? "/");
                     }
                 }
             }
             ModelState.AddModelError("", "Invalid name or password");
             return View(loginModel);
         }
+
         public async Task<RedirectResult> Logout(string returnUrl = "/")
         {
             await signInManager.SignOutAsync();
             return Redirect(returnUrl);
         }
-        [Authorize] //Changed from [AllowAnonymous]
+
+        [Authorize]
         public ViewResult Index()
         {
             return View(userManager.Users);
         }
-        [AllowAnonymous] //Changed from [AllowAnonymous]
+
+        [AllowAnonymous]
         public ViewResult Create()
         {
             return View();
         }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -77,7 +77,7 @@ namespace SportsStore.Controllers
                 IdentityResult result = await userManager.CreateAsync(user, model.Password);
                 if(result.Succeeded)
                 {
-                    return RedirectToAction("Login"); //Index
+                    return RedirectToAction("Login");
                 }
                 else
                 {
@@ -89,6 +89,7 @@ namespace SportsStore.Controllers
             }
             return View(model);
         }
+
         private void AddErrors(IdentityResult result)
         {
             foreach (IdentityError error in result.Errors)
@@ -96,6 +97,7 @@ namespace SportsStore.Controllers
                 ModelState.TryAddModelError("", error.Description);
             }
         }
+
         public async Task<IActionResult> Delete(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);
@@ -117,6 +119,7 @@ namespace SportsStore.Controllers
             }
             return View("Index", userManager.Users);
         }
+
         public async Task<IActionResult> Edit(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);

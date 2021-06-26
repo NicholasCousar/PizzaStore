@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SportsStore.Models;
 using SportsStore.Models.ViewModels;
-
 namespace SportsStore.Controllers
 {
     public class ProductController : Controller
@@ -33,25 +29,9 @@ namespace SportsStore.Controllers
             CurrentCategory = category
         });
 
-        //TEST
-        public ViewResult Home(string category,int page=1) => View(new ProductsListViewModel
+        public IActionResult Home()
         {
-            Products = repository.Products
-                .Where(p => category == null || p.Category == category)
-                .OrderBy(p => p.ProductID)
-                .Skip((page - 1) * PageSize)
-                .Take(PageSize),
-            PagingInfo = new PagingInfo
-            {
-                CurrentPage = page,
-                ItemsPerPage = PageSize,
-                TotalItems = category == null ?
-                    repository.Products.Count() : repository.Products.Where(e => e.Category == category).Count()
-            },
-            CurrentCategory = category
-        });
-
-
-
+            return View("Home");
+        }
     }
 }
