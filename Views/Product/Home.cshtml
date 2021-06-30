@@ -1,4 +1,93 @@
-﻿@{
-    Layout = "_Layout";
+﻿
+@{
+    Layout = "_ReducedLayout";
+    ViewBag.Title = "PizzaHut";
 }
-<p>Hello world</p>
+<style>
+    .div-overflow 
+    {
+        position: relative;
+    }
+    .graphicMenu
+    {
+        padding:12px;
+    }
+    .graphicMenuItem
+    {
+        overflow: hidden;
+        height: 130px;
+    }
+    .MenuHeader
+    {
+        float: left;
+        margin-top: 16px; margin-left: 16px;
+        font-size: 21px; font-family: 'Times New Roman', Times, serif;
+        position: absolute;
+        color: #FFFFFF;
+    }
+    .RightArrow 
+    {
+        color: #e52a23;
+        font-size: 21px;
+    }
+</style>
+
+
+<h2 class="text-center" style="font-family:'Brush Script MT'">Welcome to Pizzahut</h2>
+<div class="container div-overflow">
+    <h3 style="font-family:'Times New Roman', Times, serif">Menu Items</h3>
+    <div class="row">
+        <div class="col-sm-4 graphicMenu">
+            <div class="graphicMenuItem">
+                <h3 class="MenuHeader">
+                    Pizza
+                    <span class="RightArrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                </h3>
+                <a asp-action="List" asp-controller="Product" asp-route-category="Pizza">
+                <img class="navbar-brand text-white" src="~/Images/PizzaHome.png" style="width:100%" alt="Pizza" />
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-4 graphicMenu">
+            <h3 class="MenuHeader">
+                Wings
+                <span class="RightArrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+            </h3>
+            <a asp-action="List" asp-controller="Product" asp-route-category="Wings">
+            <img class="navbar-brand text-white" src="~/Images/WingHome.png" style="width:100%" alt="Wings" />
+            </a>
+        </div>
+        <div class="col-sm-4 graphicMenu">
+            <h3 class="MenuHeader">
+                Sides
+                <span class="RightArrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+            </h3>
+            <a asp-action="List" asp-controller="Product" asp-route-category="Sides">
+                <img class="navbar-brand text-white" src="~/Images/SidesHome.png" style="width:100%" alt="Sides" />
+            </a>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-4 graphicMenu">
+                <h3 class="MenuHeader">
+                    Pasta
+                    <span class="RightArrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                </h3>
+                <a asp-action="List" asp-controller="Product" asp-route-category="Pasta">
+                    <img class="navbar-brand text-white" src="~/Images/PastaHome.png" style="width:100%" alt="Pasta" />
+                </a>
+            </div>
+            <div class="col-sm-4 graphicMenu">
+                <h3 class="MenuHeader">
+                    Desserts
+                    <span class="RightArrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
+                </h3>
+                <a asp-action="List" asp-controller="Product" asp-route-category="Desserts">
+                    <img class="navbar-brand text-white" src="~/Images/DessertHome.png" style="width:100%" alt="Desserts" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
